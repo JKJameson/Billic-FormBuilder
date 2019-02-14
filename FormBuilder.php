@@ -53,11 +53,11 @@ class FormBuilder {
 			echo '><table class="table table-striped">';
 		}
 		if (array_key_exists('title', $array)) {
-			echo '<tr><th colspan="3">' . $array['title'] . '</th></tr>';
+			echo '<tr><th colspan="3" align="center">' . $array['title'] . '</th></tr>';
 		}
 		foreach ($array['form'] as $key => $opts) {
 			if ($key == 'captcha') {
-				echo '<tr><td' . $billic->highlight('captcha') . ' colspan="2"><div style="float:left;padding-right:20px"><img src="/Captcha/' . time() . '" width="150" height="75" alt="CAPTCHA"></div><br>Enter the number you see<br><input type="text" class="form-control" name="captcha" size="6" style="text-align:center;width:150px" value="' . (empty($billic->errors['captcha']) ? safe($_POST['captcha']) : '') . '"></td></tr>';
+				echo '<tr><td' . $billic->highlight('captcha') . ' colspan="2" style="vertical-align:middle" align="center"><img src="/Captcha/' . time() . '" width="150" height="75" alt="CAPTCHA" style="padding-right:20px"><input type="text" class="form-control" name="captcha" placeholder="Enter the number you see" maxlength="6" style="text-align:center;width:250px;font-weight:bold" value="' . (empty($billic->errors['captcha']) ? safe($_POST['captcha']) : '') . '"></td></tr>';
 				continue;
 			}
 			if ($opts['type'] == 'hidden') {
