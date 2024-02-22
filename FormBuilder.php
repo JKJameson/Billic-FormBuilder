@@ -18,7 +18,7 @@ class FormBuilder {
 		global $billic, $db;
 		foreach ($array['form'] as $key => $opts) {
 			if ($key == 'captcha') {
-				if (empty($_POST['captcha']) || $_SESSION['captcha'] != $_POST['captcha']) {
+				if (empty($_POST['captcha']) || strtolower($_SESSION['captcha']) !== strtolower($_POST['captcha'])) {
 					unset($_SESSION['captcha']);
 					$billic->error('Captcha code invalid, please try again', 'captcha');
 				}
