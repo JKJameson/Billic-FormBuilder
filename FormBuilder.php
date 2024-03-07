@@ -18,7 +18,7 @@ class FormBuilder {
 		global $billic, $db;
 		foreach ($array['form'] as $key => $opts) {
 			if ($key == 'captcha') {
-				if (empty($_POST['captcha']) || strtolower($_SESSION['captcha']) !== strtolower($_POST['captcha'])) {
+				if (empty($_POST['captcha']) || !isset($_SESSION['captcha']) || strtolower($_SESSION['captcha']) !== strtolower($_POST['captcha'])) {
 					unset($_SESSION['captcha']);
 					$billic->error('Captcha code invalid, please try again', 'captcha');
 				}
@@ -57,7 +57,7 @@ class FormBuilder {
 		}
 		foreach ($array['form'] as $key => $opts) {
 			if ($key == 'captcha') {
-				echo '<tr><td' . $billic->highlight('captcha') . ' colspan="2" style="vertical-align:middle" align="center"><img src="/Captcha/' . time() . '" width="150" height="75" alt="CAPTCHA" style="padding-right:20px"><input type="text" class="form-control" name="captcha" placeholder="Enter the number you see" maxlength="6" style="text-align:center;width:250px;font-weight:bold" value="' . (empty($billic->errors['captcha']) ? safe($_POST['captcha']) : '') . '"></td></tr>';
+				echo '<tr><td' . $billic->highlight('captcha') . ' colspan="2" style="vertical-align:middle" align="center"><img src="/Captcha/' . time() . '" width="150" height="75" alt="CAPTCHA" style="padding-right:20px"><input type="text" class="form-control" name="captcha" placeholder="Enter the number you see" maxlength="6" style="text-align:center;width:250px;font-weight:bold" value="' . (empty($billic->errors['captcha']) ? safe(safePOST('captcha')) : '') . '"></td></tr>';
 				continue;
 			}
 			if ($opts['type'] == 'hidden') {
